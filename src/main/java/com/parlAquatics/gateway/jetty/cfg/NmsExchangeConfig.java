@@ -12,18 +12,30 @@ public class NmsExchangeConfig {
     private final int port;
     private final int latencyAlert;
     private final String handlerName;
-
     private final int connectionRetries;
-    private final int connectionRetryInterval; // in ms
+    private final int connectionRetryInterval;
     private final String connectionRecoveryBehavior;
-    private final String connectionStartTime; // e.g., "0930"
-    private final String connectionEndTime;   // e.g., "1600"
+    private final String connectionStartTime;
+    private final String connectionEndTime;
+
+    // FIX-specific configuration
+    private final String connectionType;       // e.g., "initiator"
+    private final String senderCompID;         // e.g., "GATEWAY"
+    private final String targetCompID;         // e.g., "EXCHANGE"
+    private final int heartBtInt;              // e.g., 30
+    private final String useDataDictionary;    // e.g., "Y"
+    private final String dataDictionary;       // e.g., "FIX42.xml"
+    private final String fileStorePath;        // e.g., "store"
+    private final String fileLogPath;          // e.g., "log"
 
     public NmsExchangeConfig(String name, String acronym, String location,
                              String ipAddress, int port, int latencyAlert,
                              String handlerName, int connectionRetries,
                              int connectionRetryInterval, String connectionRecoveryBehavior,
-                             String connectionStartTime, String connectionEndTime) {
+                             String connectionStartTime, String connectionEndTime,
+                             String connectionType, String senderCompID, String targetCompID,
+                             int heartBtInt, String useDataDictionary, String dataDictionary,
+                             String fileStorePath, String fileLogPath) {
         this.name = name;
         this.acronym = acronym;
         this.location = location;
@@ -36,7 +48,17 @@ public class NmsExchangeConfig {
         this.connectionRecoveryBehavior = connectionRecoveryBehavior;
         this.connectionStartTime = connectionStartTime;
         this.connectionEndTime = connectionEndTime;
+
+        this.connectionType = connectionType;
+        this.senderCompID = senderCompID;
+        this.targetCompID = targetCompID;
+        this.heartBtInt = heartBtInt;
+        this.useDataDictionary = useDataDictionary;
+        this.dataDictionary = dataDictionary;
+        this.fileStorePath = fileStorePath;
+        this.fileLogPath = fileLogPath;
     }
+
 
     public String getName() { return name; }
     public String getAcronym() { return acronym; }
@@ -50,11 +72,26 @@ public class NmsExchangeConfig {
     public String getConnectionRecoveryBehavior() { return connectionRecoveryBehavior; }
     public String getConnectionStartTime() { return connectionStartTime; }
     public String getConnectionEndTime() { return connectionEndTime; }
+    public String getConnectionType() { return connectionType; }
+    public String getSenderCompID() { return senderCompID; }
+    public String getTargetCompID() { return targetCompID; }
+    public int getHeartBtInt() { return heartBtInt; }
+    public String getUseDataDictionary() { return useDataDictionary; }
+    public String getDataDictionary() { return dataDictionary; }
+    public String getFileStorePath() { return fileStorePath; }
+    public String getFileLogPath() { return fileLogPath; }
 
     // Optional: toString for debugging
     @Override
     public String toString() {
-        return String.format("NmsExchangeConfig{name='%s', acronym='%s', location='%s', ip='%s', port=%d, latencyAlert=%d, handler='%s'}",
-                name, acronym, location, ipAddress, port, latencyAlert, handlerName);
+        return String.format(
+                "NmsExchangeConfig{name='%s', acronym='%s', location='%s', ip='%s', port=%d, latencyAlert=%d, handler='%s', " +
+                        "connectionType='%s', senderCompID='%s', targetCompID='%s', heartBtInt=%d, useDataDictionary='%s', " +
+                        "dataDictionary='%s', fileStorePath='%s', fileLogPath='%s'}",
+                name, acronym, location, ipAddress, port, latencyAlert, handlerName,
+                connectionType, senderCompID, targetCompID, heartBtInt, useDataDictionary,
+                dataDictionary, fileStorePath, fileLogPath
+        );
     }
+
 }

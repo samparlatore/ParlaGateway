@@ -1,5 +1,6 @@
 package com.parlAquatics.gateway.core;
 
+import com.parlAquatics.gateway.core.util.MicrosecondFormatter;
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
 import com.parlAquatics.gateway.protocol.ExchangeHandler;
 import com.parlAquatics.gateway.protocol.factory.ExchangeHandlerFactory;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Properties;
 import java.util.concurrent.*;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 /**
@@ -22,7 +24,6 @@ import java.util.logging.Logger;
 public class GatewayCore {
     private final ExecutorService executor;
     private static final Logger logger = Logger.getLogger(GatewayCore.class.getName());
-
     private static int requestCount = 0;
     private static int errorCount = 0;
     private static long startTime = System.currentTimeMillis();
@@ -37,7 +38,6 @@ public class GatewayCore {
         this.configs = configs;
         handlerFactories.put("fix", new FixHandlerFactory());
         handlerFactories.put("json", new JsonHandlerFactory());
-        // Add more as needed
         String model = configs.getProperty("gateway.threadingModel", "fixed");
         int threadCount = Integer.parseInt(configs.getProperty("gateway.threadPoolSize", "8"));
         switch (model) {

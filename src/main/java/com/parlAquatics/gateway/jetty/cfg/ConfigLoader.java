@@ -70,7 +70,16 @@ public class ConfigLoader implements ServletContextListener {
                             Integer.parseInt(nmsEchangeProps.getProperty(prefix + "connectionRetryInterval", "3000")),
                             nmsEchangeProps.getProperty(prefix + "connectionRecoveryBehavior", "default"),
                             nmsEchangeProps.getProperty(prefix + "connectionStartTime", "0930"),
-                            nmsEchangeProps.getProperty(prefix + "connectionEndTime", "1600")
+                            nmsEchangeProps.getProperty(prefix + "connectionEndTime", "1600"),
+
+                            nmsEchangeProps.getProperty(prefix + "connectionType", "initiator"),
+                            nmsEchangeProps.getProperty(prefix + "senderCompID", "GATEWAY"),
+                            nmsEchangeProps.getProperty(prefix + "targetCompID", "EXCHANGE"),
+                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "heartBtInt", "30")),
+                            nmsEchangeProps.getProperty(prefix + "useDataDictionary", "Y"),
+                            nmsEchangeProps.getProperty(prefix + "dataDictionary", "FIX42.xml"),
+                            nmsEchangeProps.getProperty(prefix + "fileStorePath", "store"),
+                            nmsEchangeProps.getProperty(prefix + "fileLogPath", "log")
                     );
 
                     exchangeConfigs.put(i, config);
