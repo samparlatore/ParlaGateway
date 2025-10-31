@@ -1,4 +1,4 @@
-# ParlAquatics Gateway
+# ParlaGateway
 
 A modular, thread-safe gateway engine for simulating and connecting to multiple financial exchanges using configurable protocols like FIX and JSON. Built for flexibility, observability, and realism — designed and developed by Sam Parlatore.
 
