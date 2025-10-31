@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url('/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.attribution {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.attribution a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+  color: grey;
+}
+
+.status-box {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #ccc;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 640px;
+  margin: 30px auto 0 auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-in;
+  font-weight: bold; /* Makes all text inside bold */
+}
+
+.status-box h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.status-box p {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.status-box .timestamp {
+  font-size: 1.3rem;
+  color: #666;
+}
+
+@media (max-width: 700px) {
+  .status-box {
+    width: 90%;
+    margin: 30px auto 0 auto;
+  }
+}
+
+
+h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: grey;
+}
+
+.timestamp {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.link-button {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+  background-color: #2980b9;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
