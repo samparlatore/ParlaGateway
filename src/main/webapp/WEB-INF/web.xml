@@ -36,6 +36,24 @@
         <servlet-name>StatusServlet</servlet-name>
         <url-pattern>/status</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>StatusDataServlet</servlet-name>
+        <servlet-class>com.parlAquatics.gateway.jetty.app.StatusDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StatusDataServlet</servlet-name>
+        <url-pattern>/status-data</url-pattern>
+    </servlet-mapping>
+
+    <!-- ControlServlet -->
+    <servlet>
+        <servlet-name>GatewayControlServlet</servlet-name>
+        <servlet-class>com.parlAquatics.gateway.jetty.app.GatewayControlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GatewayControlServlet</servlet-name>
+        <url-pattern>/control</url-pattern>
+    </servlet-mapping>
 
     <!-- Config Loader -->
     <listener>

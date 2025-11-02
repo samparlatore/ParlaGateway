@@ -1,14 +1,14 @@
-package com.parlAquatics.gateway.protocol.factory;
+package com.parlAquatics.gateway.protocols.json;
 
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
-import com.parlAquatics.gateway.protocol.ExchangeHandler;
-import com.parlAquatics.gateway.protocol.JsonProtocolHandler;
+import com.parlAquatics.gateway.protocols.ExchangeHandler;
+import com.parlAquatics.gateway.protocols.ExchangeHandlerFactory;
 
 /**
  * Factory for creating protocol handlers.
  * Created by Sam Parlatore for ParlAquatics Gateway.
  */
-public class JsonHandlerFactory implements ExchangeHandlerFactory{
+public class JsonHandlerFactory implements ExchangeHandlerFactory {
 
     @Override
     public ExchangeHandler create(NmsExchangeConfig config) {

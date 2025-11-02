@@ -1,5 +1,8 @@
 package com.parlAquatics.gateway.jetty.cfg;
 
+import java.time.Instant;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by Sam Parlatore
  * Part of the ParlAquatics Gateway project
@@ -17,7 +20,6 @@ public class NmsExchangeConfig {
     private final String connectionRecoveryBehavior;
     private final String connectionStartTime;
     private final String connectionEndTime;
-
     // FIX-specific configuration
     private final String connectionType;       // e.g., "initiator"
     private final String senderCompID;         // e.g., "GATEWAY"
@@ -27,6 +29,19 @@ public class NmsExchangeConfig {
     private final String dataDictionary;       // e.g., "FIX42.xml"
     private final String fileStorePath;        // e.g., "store"
     private final String fileLogPath;          // e.g., "log"
+    private final String beginString; // e.g. "FIX.4.4"
+
+    // Runtime state (updated by handler logic)
+    private volatile ConnectionState connectionState = ConnectionState.SESSION_CLOSED;
+    private volatile int lastLatencyMs = -1;
+    private volatile Instant lastMessageTimestamp = null;
+
+    public enum ConnectionState {
+        SESSION_CLOSED,     // Explicitly disconnected
+        CONNECTING,         // Actively trying to connect
+        CONNECTED,          // Fully connected
+        FAILED              // All retries exhausted
+    }
 
     public NmsExchangeConfig(String name, String acronym, String location,
                              String ipAddress, int port, int latencyAlert,
@@ -35,7 +50,7 @@ public class NmsExchangeConfig {
                              String connectionStartTime, String connectionEndTime,
                              String connectionType, String senderCompID, String targetCompID,
                              int heartBtInt, String useDataDictionary, String dataDictionary,
-                             String fileStorePath, String fileLogPath) {
+                             String fileStorePath, String fileLogPath, String beginString) {
         this.name = name;
         this.acronym = acronym;
         this.location = location;
@@ -57,6 +72,7 @@ public class NmsExchangeConfig {
         this.dataDictionary = dataDictionary;
         this.fileStorePath = fileStorePath;
         this.fileLogPath = fileLogPath;
+        this.beginString = beginString;
     }
 
 
@@ -80,8 +96,16 @@ public class NmsExchangeConfig {
     public String getDataDictionary() { return dataDictionary; }
     public String getFileStorePath() { return fileStorePath; }
     public String getFileLogPath() { return fileLogPath; }
+    public int getLastLatencyMs() { return lastLatencyMs; }
+    public Instant getLastMessageTimestamp() { return lastMessageTimestamp; }
+    public void setLastLatencyMs(int latencyMs) {  this.lastLatencyMs = latencyMs;}
+    public void setLastMessageTimestamp(Instant timestamp) { this.lastMessageTimestamp = timestamp;}
+    public ConnectionState getConnectionState() { return connectionState; }
+    public void setConnectionState(ConnectionState state) { this.connectionState = state; }
+    public String getConnectionStatus() { return connectionState.name().toLowerCase().replace("_", " "); }
+    public String getBeginString() { return beginString; }
 
-    // Optional: toString for debugging
+
     @Override
     public String toString() {
         return String.format(

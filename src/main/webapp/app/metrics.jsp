@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="status-box">
-        <h1>${pageTitle}</h1>
+        <h1 class="dashboard-title">${pageTitle}</h1>
         <p>Metrics are being collected and reported in JSON format.</p>
         <p class="timestamp">Generated at: <%= new java.util.Date() %></p>
 

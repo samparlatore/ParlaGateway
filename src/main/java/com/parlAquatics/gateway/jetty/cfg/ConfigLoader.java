@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 @WebListener
 public class ConfigLoader implements ServletContextListener {
     private static final Logger logger = Logger.getLogger(ConfigLoader.class.getName());
-    private ConcurrentHashMap<Integer,NmsExchangeConfig> exchangeConfigs = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String,NmsExchangeConfig> exchangeConfigs = new ConcurrentHashMap<>();
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -79,10 +79,11 @@ public class ConfigLoader implements ServletContextListener {
                             nmsEchangeProps.getProperty(prefix + "useDataDictionary", "Y"),
                             nmsEchangeProps.getProperty(prefix + "dataDictionary", "FIX42.xml"),
                             nmsEchangeProps.getProperty(prefix + "fileStorePath", "store"),
-                            nmsEchangeProps.getProperty(prefix + "fileLogPath", "log")
+                            nmsEchangeProps.getProperty(prefix + "fileLogPath", "log"),
+                            nmsEchangeProps.getProperty(prefix + "beginString", "FIX.4.4")
                     );
 
-                    exchangeConfigs.put(i, config);
+                    exchangeConfigs.put(config.getAcronym(), config);
                     logger.info("Loaded config for exchange: " + config.getAcronym());
                 } catch (Exception e) {
                     logger.info("Error loading config for index " + i + ": " + e.getMessage());

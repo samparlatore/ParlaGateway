@@ -1,12 +1,11 @@
-package com.parlAquatics.gateway.test.testServer;
+package com.parlAquatics.gateway.simulation.testServer;
 
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -31,11 +30,44 @@ public class NmsTestServer {
     private static void startExchangeServer(NmsExchangeConfig config) {
         try (ServerSocket serverSocket = new ServerSocket(config.getPort())) {
             while (true) {
-                try (Socket client = serverSocket.accept();
-                     OutputStream out = client.getOutputStream()) {
+                try {
+                    Socket client = serverSocket.accept();
+                    OutputStream out = client.getOutputStream();
+                    BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
                     System.out.println("[" + config.getAcronym() + "] Connection on port " + config.getPort());
-                    out.write(("OK from " + config.getAcronym() + "\n").getBytes());
-                    out.flush();
+
+                    boolean logonReceived = false;
+                    InputStream inputS = client.getInputStream();
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = inputS.read(buffer)) != -1) {
+                        String inbound = new String(buffer, 0, len, StandardCharsets.US_ASCII);
+                        System.out.println("[" + config.getAcronym() + "] Received: " + inbound);
+
+
+                        if (!logonReceived && inbound.contains("35=A")) {
+                            logonReceived = true;
+
+                            String logonResponse = "8=FIX.4.2\u00019=65\u000135=A\u000134=1\u000149=" + config.getTargetCompID() +
+                                    "\u000156=" + config.getSenderCompID() + "\u000152=20251102-14:30:00\u000198=0\u0001108=" +
+                                    config.getHeartBtInt() + "\u000110=000\u0001";
+
+                            out.write(logonResponse.getBytes());
+                            out.flush();
+                            System.out.println("[" + config.getAcronym() + "] Sent Logon response " + logonResponse);
+                            continue;
+                        }
+
+                        if (logonReceived && inbound.contains("35=1")) { // TestRequest
+                            String hb = "8=FIX.4.2\u00019=12\u000135=0\u000134=2\u000149=" + config.getTargetCompID() +
+                                    "\u000156=" + config.getSenderCompID() + "\u000152=20251102-14:30:10\u000110=000\u0001";
+                            out.write(hb.getBytes());
+                            out.flush();
+                            System.out.println("[" + config.getAcronym() + "] Responded to TestRequest with Heartbeat");
+                        }
+
+                        // You can add more message types here later (e.g., Logout, ExecutionReport, etc.)
+                    }
                 } catch (IOException e) {
                     System.err.println("[" + config.getAcronym() + "] Error: " + e.getMessage());
                 }
@@ -78,8 +110,8 @@ public class NmsTestServer {
                     nmsEchangeProps.getProperty(prefix + "useDataDictionary", "Y"),
                     nmsEchangeProps.getProperty(prefix + "dataDictionary", "FIX42.xml"),
                     nmsEchangeProps.getProperty(prefix + "fileStorePath", "store"),
-                    nmsEchangeProps.getProperty(prefix + "fileLogPath", "log")
-
+                    nmsEchangeProps.getProperty(prefix + "fileLogPath", "log"),
+                    nmsEchangeProps.getProperty(prefix + "beginString", "FIX.4.4")
             );
 
             exchanges.add(config);

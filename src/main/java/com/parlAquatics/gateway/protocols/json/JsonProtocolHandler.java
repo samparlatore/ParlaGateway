@@ -1,11 +1,8 @@
-package com.parlAquatics.gateway.protocol;
+package com.parlAquatics.gateway.protocols.json;
 
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
+import com.parlAquatics.gateway.protocols.ExchangeHandler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -24,4 +21,16 @@ public class JsonProtocolHandler implements ExchangeHandler {
     public void handle(Socket client) {
         // Use this.config inside
     }
+
+    @Override
+    public void close() {
+        ExchangeHandler.super.close();
+    }
+
+    @Override
+    public void sendRaw(String msg) {
+
+    }
+
+
 }

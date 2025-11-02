@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 /**
  * Created by Sam Parlatore for ParlAquatics Gateway.
  */
-public class StatusServlet extends HttpServlet {
-    private static final Logger logger = Logger.getLogger(StatusServlet.class.getName());
+public class StatusDataServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(StatusDataServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,7 +25,6 @@ public class StatusServlet extends HttpServlet {
 
         GatewayCore gateway = (GatewayCore) getServletContext().getAttribute("gatewayCore");
         if (gateway == null) {
-            logger.severe("GatewayCore not found in ServletContext");
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "GatewayCore not available");
             return;
         }
@@ -42,20 +41,15 @@ public class StatusServlet extends HttpServlet {
                 ))
                 .collect(Collectors.joining(",", "[", "]"));
 
-        // Store JSON in request scope for JSP to consume if needed
-        request.setAttribute("exchangeStatusJson", json);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
-        // Set page title and forward to JSP
-        String pageTitle = "Exchange Status Dashboard";
-        getServletContext().setAttribute("pageTitle", pageTitle);
-        request.getRequestDispatcher("/app/status.jsp").forward(request, response);
-
-        logger.info("Served " + statuses.size() + " exchange statuses to " + request.getRemoteAddr());
+        //logger.info("Delivered " + statuses.size() + " statuses to " + request.getRemoteAddr());
     }
 
     private String escapeJson(String input) {
         if (input == null) return "";
         return input.replace("\"", "\\\"").replace("\n", "").replace("\r", "");
     }
-
 }

@@ -1,8 +1,8 @@
-package com.parlAquatics.gateway.protocol.factory;
+package com.parlAquatics.gateway.protocols.fix;
 
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
-import com.parlAquatics.gateway.protocol.ExchangeHandler;
-import com.parlAquatics.gateway.protocol.FixProtocolHandler;
+import com.parlAquatics.gateway.protocols.ExchangeHandler;
+import com.parlAquatics.gateway.protocols.ExchangeHandlerFactory;
 
 /**
  * Factory for creating protocol handlers.

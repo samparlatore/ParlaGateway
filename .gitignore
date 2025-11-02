@@ -1,3 +1,7 @@
+FIX42.xml
+FIX44.xml
+store
+store-testServer
 .idea
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -38,3 +42,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
+/store/

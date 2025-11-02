@@ -1,4 +1,4 @@
-package com.parlAquatics.gateway.protocol;
+package com.parlAquatics.gateway.protocols;
 
 import java.net.Socket;
 
@@ -8,4 +8,6 @@ import java.net.Socket;
  */
 public interface ExchangeHandler {
     void handle(Socket client);
+    default void close() {}
+    void sendRaw(String msg);
 }

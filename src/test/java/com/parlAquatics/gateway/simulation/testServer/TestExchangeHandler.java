@@ -1,23 +1,20 @@
-package com.parlAquatics.gateway.test.testServer;
+package com.parlAquatics.gateway.simulation.testServer;
 
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
-import com.parlAquatics.gateway.protocol.ExchangeHandler;
+import com.parlAquatics.gateway.protocols.ExchangeHandler;
 
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.logging.Logger;
 
 /**
- * Created by Sam Parlatore
- * Part of the ParlAquatics Gateway project
- *
- * This class handles protocol-specific socket processing for exchange connections.
+ * Created by Sam Parlatore for ParlAquatics Gateway.
  */
-public class DefaultExchangeHandler implements ExchangeHandler {
-    private static final Logger logger = Logger.getLogger(DefaultExchangeHandler.class.getName());
+public class TestExchangeHandler implements ExchangeHandler {
+    private static final Logger logger = Logger.getLogger(TestExchangeHandler.class.getName());
     private final NmsExchangeConfig config;
 
-    DefaultExchangeHandler (NmsExchangeConfig config) {
+    TestExchangeHandler( NmsExchangeConfig config){
         this.config = config;
     }
 
@@ -31,4 +28,15 @@ public class DefaultExchangeHandler implements ExchangeHandler {
             logger.severe("[" + config.getAcronym() + "] Error responding: " + e.getMessage());
         }
     }
+
+    @Override
+    public void close() {
+        ExchangeHandler.super.close();
+    }
+
+    @Override
+    public void sendRaw(String msg) {
+
+    }
+
 }

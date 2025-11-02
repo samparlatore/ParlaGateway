@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="status-box">
-        <h1><%= application.getAttribute("pageTitle") %></h1>
+        <h1 class="dashboard-title">${pageTitle}</h1>
         <p>Status: <strong>OK</strong></p>
         <p class="timestamp">Uptime: <%= new java.util.Date().toString() %></p>
     </div>

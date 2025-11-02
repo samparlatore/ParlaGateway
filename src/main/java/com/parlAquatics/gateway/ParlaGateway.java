@@ -1,7 +1,7 @@
 package com.parlAquatics.gateway;
 
 import com.parlAquatics.gateway.core.GatewayCore;
-import com.parlAquatics.gateway.core.util.MicrosecondFormatter;
+import com.parlAquatics.gateway.util.MicrosecondFormatter;
 import com.parlAquatics.gateway.jetty.JettyInformationServer;
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
 import jakarta.servlet.ServletContext;
@@ -23,7 +23,7 @@ public class ParlaGateway {
         // Retrieve the context after Jetty starts
         ServletContext context = JettyInformationServer.getServletContext();
         @SuppressWarnings("unchecked")
-        ConcurrentHashMap<Integer, NmsExchangeConfig> exchangeConfigs = (ConcurrentHashMap<Integer, NmsExchangeConfig>) context.getAttribute("nmsExchangeConfigs");
+        ConcurrentHashMap<String, NmsExchangeConfig> exchangeConfigs = (ConcurrentHashMap<String, NmsExchangeConfig>) context.getAttribute("nmsExchangeConfigs");
 
         @SuppressWarnings("unchecked")
         Properties gatewayConfigs = (Properties) context.getAttribute("generalConfigs");
@@ -40,7 +40,9 @@ public class ParlaGateway {
 
 
         // Start TCP/IP core with context
-        new Thread(() -> new GatewayCore(exchangeConfigs, gatewayConfigs).start()).start();
+        GatewayCore gateway = new GatewayCore(exchangeConfigs, gatewayConfigs);
+        context.setAttribute("gatewayCore", gateway);
+        new Thread(gateway::start).start();
 
     }
 }

@@ -1,4 +1,4 @@
-package com.parlAquatics.gateway.core.util;
+package com.parlAquatics.gateway.util;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
