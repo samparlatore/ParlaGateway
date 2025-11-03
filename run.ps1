@@ -17,10 +17,12 @@ $requiredScripts = @(
 # Download missing scripts
 foreach ($script in $requiredScripts) {
     $localPath = Join-Path $scriptDir $script
-    $remoteUrl = "$repoBase/$script"  # Correct interpolation
+    #$remoteUrl = "$repoBase/$script"  # Correct interpolation
+    $remoteUrl = "$($repoBase)/$($script)"  # Extra safe
     if (-not (Test-Path $localPath)) {
         Write-Host "📥 Downloading $script..."
-        Invoke-WebRequest -Uri $remoteUrl -OutFile $localPath
+        #Invoke-WebRequest -Uri $remoteUrl -OutFile $localPath
+        Invoke-WebRequest -Uri ($remoteUrl) -OutFile ($localPath)
     }
 }
 
