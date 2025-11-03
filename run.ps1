@@ -1,6 +1,6 @@
 # run.ps1
 $scriptDir = Join-Path $PSScriptRoot "scripts"
-$repoBase = "https://raw.githubusercontent.com/samparlatore/ParlaGateway/main/scripts"
+$repoBase = "https://raw.githubusercontent.com/samparlatore/ParlaGateway/refs/heads/master/scripts"
 
 # Ensure scripts/ folder exists
 if (-not (Test-Path $scriptDir)) {

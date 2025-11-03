@@ -1,7 +1,8 @@
 #!/bin/bash
 
 SCRIPT_DIR="./scripts"
-REPO_RAW_BASE="https://raw.githubusercontent.com/samparlatore/ParlaGateway/main/scripts"
+#REPO_RAW_BASE="https://raw.githubusercontent.com/samparlatore/ParlaGateway/main/scripts"
+$repoBase = "https://raw.githubusercontent.com/samparlatore/ParlaGateway/refs/heads/master/scripts"
 
 # Ensure scripts/ folder exists
 mkdir -p "$SCRIPT_DIR"

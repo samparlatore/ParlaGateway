@@ -12,6 +12,18 @@ ParlAquatics Gateway is a Java-based backend system that:
 - Uses config-driven concurrency, retry logic, and connection windows
 - Designed for extensibility, testability, and production-grade robustness
 
+## Install Windows
+```bash
+curl -L https://raw.githubusercontent.com/samparlatore/ParlaGateway/refs/heads/master/run.ps1 > run.ps1
+./run.ps1
+```
+
+## Install MacOS/Linux
+```bash
+curl -L https://raw.githubusercontent.com/samparlatore/ParlaGateway/refs/heads/master/run.sh > run.sh
+./run.sh
+```
+
 ## 🧩 Architecture
 
 ```text
