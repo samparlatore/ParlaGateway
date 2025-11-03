@@ -48,6 +48,10 @@ if (-not (Test-Path "target")) {
     Write-Host "ParlaGateway already compiled."
 }
 
+Write-Host "******************************************"
+Write-Host "ParlaGateway Setup complete. You access the gateway at http://127.0.0.1:8080 once started."
+Write-Host "******************************************"
+
 # Prompt to start test server
 $startTest = Read-Host "Start test server? (y/n)"
 if ($startTest -match '^[Yy]$') {

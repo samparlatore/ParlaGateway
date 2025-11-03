@@ -41,6 +41,10 @@ else
   echo "✅ ParlaGateway already compiled."
 fi
 
+echo  "******************************************"
+echo  "✅ ParlaGateway Setup complete. You access the gateway at http://127.0.0.1:8080 once started."
+echo  "******************************************"
+
 # Prompt to start test server
 read -p "🚀 Start test server? (y/n): " start_test
 if [[ "$start_test" =~ ^[Yy]$ ]]; then
