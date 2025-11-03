@@ -1,6 +1,7 @@
 FIX42.xml
 FIX44.xml
 store
+log
 store-testServer
 .idea
 target/
