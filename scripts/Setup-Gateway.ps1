@@ -43,6 +43,7 @@ Set-Location "$rootPath\$repoDir"
 if (-not (Test-Path "target")) {
     Write-Host "Compiling ParlaGateway..."
     mvn clean install
+    mvn dependency:copy-dependencies -DoutputDirectory=lib
 } else {
     Write-Host "ParlaGateway already compiled."
 }
