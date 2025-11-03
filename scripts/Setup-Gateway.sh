@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Define repo and directory
+# Resolve paths
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 REPO_URL="https://github.com/samparlatore/ParlaGateway.git"
-REPO_DIR="ParlaGateway"
+REPO_DIR="$ROOT_DIR/ParlaGateway"
 
 # Check for Git
 if ! command -v git &> /dev/null; then
@@ -25,13 +27,13 @@ fi
 # Clone repo if not present
 if [ ! -d "$REPO_DIR" ]; then
   echo "📦 Cloning ParlaGateway..."
-  git clone "$REPO_URL"
+  git clone "$REPO_URL" "$REPO_DIR"
 else
   echo "📁 ParlaGateway already exists."
 fi
 
 # Compile if target not built
-cd "$REPO_DIR" || exit
+cd "$REPO_DIR" || exit 1
 if [ ! -d "target" ]; then
   echo "🔨 Compiling ParlaGateway..."
   mvn clean install
@@ -43,14 +45,12 @@ fi
 read -p "🚀 Start test server? (y/n): " start_test
 if [[ "$start_test" =~ ^[Yy]$ ]]; then
   echo "🧪 Launching test server..."
-  # Replace with actual test server command
-  ./start-test-server.sh
+  bash "$SCRIPT_DIR/start-test-server.sh"
 fi
 
 # Prompt to start gateway
 read -p "🌐 Start gateway? (y/n): " start_gateway
 if [[ "$start_gateway" =~ ^[Yy]$ ]]; then
   echo "🔌 Launching gateway..."
-  # Replace with actual gateway command
-  ./start-gateway.sh
+  bash "$SCRIPT_DIR/start-gateway.sh"
 fi

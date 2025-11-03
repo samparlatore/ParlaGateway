@@ -1,6 +1,12 @@
+# scripts/Setup-Gateway.ps1
+
 # Define repo and directory
 $repoUrl = "https://github.com/samparlatore/ParlaGateway.git"
 $repoDir = "ParlaGateway"
+
+# Resolve root path (one level up from scripts/)
+$rootPath = Resolve-Path "$PSScriptRoot\.."
+$scriptsPath = "$PSScriptRoot"
 
 # Check for Git
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
@@ -20,6 +26,9 @@ if (-not (Get-Command mvn -ErrorAction SilentlyContinue)) {
     Write-Host "✅ Maven is installed."
 }
 
+# Move to root directory
+Set-Location $rootPath
+
 # Clone repo if not present
 if (-not (Test-Path $repoDir)) {
     Write-Host "📦 Cloning ParlaGateway..."
@@ -29,7 +38,7 @@ if (-not (Test-Path $repoDir)) {
 }
 
 # Compile if target not built
-Set-Location $repoDir
+Set-Location "$rootPath\$repoDir"
 if (-not (Test-Path "target")) {
     Write-Host "🔨 Compiling ParlaGateway..."
     mvn clean install
@@ -41,14 +50,12 @@ if (-not (Test-Path "target")) {
 $startTest = Read-Host "🚀 Start test server? (y/n)"
 if ($startTest -match '^[Yy]$') {
     Write-Host "🧪 Launching test server..."
-    # Replace with actual test server command
-    .\start-test-server.ps1
+    & "$scriptsPath\start-test-server.ps1"
 }
 
 # Prompt to start gateway
 $startGateway = Read-Host "🌐 Start gateway? (y/n)"
 if ($startGateway -match '^[Yy]$') {
     Write-Host "🔌 Launching gateway..."
-    # Replace with actual gateway command
-    .\start-gateway.ps1
+    & "$scriptsPath\start-gateway.ps1"
 }
