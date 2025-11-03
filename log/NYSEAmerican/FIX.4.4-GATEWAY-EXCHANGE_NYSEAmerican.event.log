@@ -1,0 +1,7 @@
+20251103-15:02:22: Session FIX.4.4:GATEWAY->EXCHANGE_NYSEAmerican schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-15:02:22: Created session: FIX.4.4:GATEWAY->EXCHANGE_NYSEAmerican
+20251103-15:02:22: Configured socket addresses for session: [/127.0.0.1:25002]
+20251103-15:02:22: MINA session created: local=/127.0.0.1:49911, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25002
+20251103-15:02:23: Initiated logon request
+20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:02:23: Received logon

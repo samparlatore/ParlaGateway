@@ -66,12 +66,11 @@ public class GatewayControlServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "disconnect":
-                gateway.disconnect(acronym);
-                break;
-            case "connect":
-                gateway.connect(cfg);
-                break;
+            case "disconnect": gateway.disconnect(acronym); break;
+            case "connect": gateway.connect(cfg);  break;
+            case "heartbeat": gateway.getFixMessageSender().sendHeartbeat(acronym); break;
+            case "testRequest": gateway.getFixMessageSender().sendTestRequest(acronym); break;
+            case "resendRequest": gateway.getFixMessageSender().sendResendRequest(acronym); break;
             default:
                 resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown action");
                 return;

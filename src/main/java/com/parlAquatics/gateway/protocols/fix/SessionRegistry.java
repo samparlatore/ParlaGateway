@@ -3,7 +3,6 @@ package com.parlAquatics.gateway.protocols.fix;
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
 import quickfix.SessionID;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;

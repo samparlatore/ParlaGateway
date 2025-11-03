@@ -3,6 +3,7 @@ package com.parlAquatics.gateway.core;
 import com.parlAquatics.gateway.core.model.ExchangeStatus;
 import com.parlAquatics.gateway.jetty.cfg.NmsExchangeConfig;
 
+import com.parlAquatics.gateway.protocols.fix.FixMessageSender;
 import com.parlAquatics.gateway.protocols.fix.QuickFIXApp;
 import com.parlAquatics.gateway.protocols.fix.SessionRegistry;
 import quickfix.*;
@@ -24,21 +25,19 @@ public class GatewayCore {
     private final Properties configs;
     private final Map<String, NmsExchangeConfig> exchangeConfigs;
     private final SessionRegistry sessionRegistry;
-    Map<String, Initiator> initiators = new ConcurrentHashMap<>();
+    private final Map<String, Initiator> initiators = new ConcurrentHashMap<>();
+    private final FixMessageSender fixMessageSender;
 
+    public Iterable<NmsExchangeConfig> getExchangeConfigs() { return exchangeConfigs.values(); }
+    public SessionRegistry getSessionRegistry() { return sessionRegistry; }
 
-    public Iterable<NmsExchangeConfig> getExchangeConfigs() {
-        return exchangeConfigs.values();
-    }
-
-    public SessionRegistry getSessionRegistry() {
-        return sessionRegistry;
-    }
+    public FixMessageSender getFixMessageSender() { return fixMessageSender; }
 
     public GatewayCore(ConcurrentHashMap<String, NmsExchangeConfig> exchangeConfigs, Properties configs) {
         this.exchangeConfigs = exchangeConfigs;
         this.configs = configs;
         this.sessionRegistry = new SessionRegistry();
+        this.fixMessageSender = new FixMessageSender(sessionRegistry);
         //setup the QuickFix components for each exchange.
         for (NmsExchangeConfig cfg : exchangeConfigs.values()) {
             SessionID sessionId = cfg.buildQuickFIXSessionID();
@@ -76,7 +75,9 @@ public class GatewayCore {
                         cfg.getConnectionStatus(),
                         cfg.getLastLatencyMicros(),
                         cfg.getLastMessageTimestamp(),
-                        cfg.getLastMessageType()
+                        cfg.getLastMessageType(),
+                        cfg.getLatencyAlert(),
+                        cfg.getHeartBtInt() * 1000
                 ))
                 .collect(Collectors.toList());
     }
@@ -104,6 +105,7 @@ public class GatewayCore {
         logger.info("Manual disconnect triggered for " + acronym);
         try {
             if ( initiators.get(acronym).isLoggedOn()) {
+                getFixMessageSender().sendLogoffMessage(acronym);
                 initiators.get(acronym).stop();
             }
             getExchangeConfigByAcronym(acronym).setConnectionState( NmsExchangeConfig.ConnectionState.SESSION_CLOSED );

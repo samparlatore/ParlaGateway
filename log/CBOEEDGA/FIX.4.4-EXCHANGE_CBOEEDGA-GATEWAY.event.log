@@ -1,10 +1,110 @@
-20251103-06:24:31: Session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
-20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY
-20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:49872
-20251103-07:09:51: Acceptor heartbeat set to 30 seconds
-20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-07:09:51: Received logon
-20251103-07:09:51: Responding to Logon request
-20251103-07:10:48: Received logout request
-20251103-07:10:48: Sent logout response
-20251103-07:10:48: Disconnecting: Received logout request
+20251103-13:55:33: Session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-13:55:33: Created session: FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY
+20251103-14:58:18: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:62315
+20251103-14:58:18: Acceptor heartbeat set to 30 seconds
+20251103-14:58:18: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-14:58:18: Received logon
+20251103-14:58:18: Responding to Logon request
+20251103-15:02:01: Disconnecting: Socket exception (/127.0.0.1:62315): java.net.SocketException: Connection reset
+20251103-15:02:23: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:49902
+20251103-15:02:23: Acceptor heartbeat set to 30 seconds
+20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:02:23: Received logon
+20251103-15:02:23: Responding to Logon request
+20251103-15:05:48: Disconnecting: Socket exception (/127.0.0.1:49902): java.net.SocketException: Connection reset
+20251103-15:06:24: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:58134
+20251103-15:06:24: Acceptor heartbeat set to 30 seconds
+20251103-15:06:24: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:06:24: Received logon
+20251103-15:06:24: Responding to Logon request
+20251103-15:10:18: Disconnecting: Socket exception (/127.0.0.1:58134): java.net.SocketException: Connection reset
+20251103-15:10:42: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:61684
+20251103-15:10:42: Acceptor heartbeat set to 30 seconds
+20251103-15:10:42: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:10:42: Received logon
+20251103-15:10:42: Responding to Logon request
+20251103-15:14:12: Disconnecting: Socket exception (/127.0.0.1:61684): java.net.SocketException: Connection reset
+20251103-15:19:27: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:60296
+20251103-15:19:27: Acceptor heartbeat set to 30 seconds
+20251103-15:19:27: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:19:27: Received logon
+20251103-15:19:27: Responding to Logon request
+20251103-15:34:28: Disconnecting: Socket exception (/127.0.0.1:60296): java.net.SocketException: Connection reset
+20251103-15:35:10: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:50500
+20251103-15:35:10: Acceptor heartbeat set to 30 seconds
+20251103-15:35:10: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:35:10: Received logon
+20251103-15:35:10: Responding to Logon request
+20251103-15:37:25: Disconnecting: Socket exception (/127.0.0.1:50500): java.net.SocketException: Connection reset
+20251103-15:37:43: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:57638
+20251103-15:37:43: Acceptor heartbeat set to 30 seconds
+20251103-15:37:43: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:37:43: Received logon
+20251103-15:37:43: Responding to Logon request
+20251103-15:40:41: Disconnecting: Socket exception (/127.0.0.1:57638): java.net.SocketException: Connection reset
+20251103-16:15:16: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:59992
+20251103-16:15:16: Acceptor heartbeat set to 30 seconds
+20251103-16:15:16: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:15:16: Received logon
+20251103-16:15:16: Responding to Logon request
+20251103-16:16:22: Received logout request
+20251103-16:16:22: Sent logout response
+20251103-16:16:22: Disconnecting: Received logout request
+20251103-16:28:13: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:53522
+20251103-16:28:13: Acceptor heartbeat set to 30 seconds
+20251103-16:28:13: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:28:13: Received logon
+20251103-16:28:13: Responding to Logon request
+20251103-16:32:00: Disconnecting: Socket exception (/127.0.0.1:53522): java.net.SocketException: Connection reset
+20251103-16:35:38: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:63992
+20251103-16:35:38: Acceptor heartbeat set to 30 seconds
+20251103-16:35:38: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:35:38: Received logon
+20251103-16:35:38: Responding to Logon request
+20251103-16:37:58: Disconnecting: Socket exception (/127.0.0.1:63992): java.net.SocketException: Connection reset
+20251103-16:38:29: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:52203
+20251103-16:38:29: Acceptor heartbeat set to 30 seconds
+20251103-16:38:29: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:38:29: Received logon
+20251103-16:38:29: Responding to Logon request
+20251103-16:40:10: Disconnecting: Socket exception (/127.0.0.1:52203): java.net.SocketException: Connection reset
+20251103-16:40:28: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:55760
+20251103-16:40:28: Acceptor heartbeat set to 30 seconds
+20251103-16:40:28: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:40:28: Received logon
+20251103-16:40:28: Responding to Logon request
+20251103-16:41:58: Disconnecting: Socket exception (/127.0.0.1:55760): java.net.SocketException: Connection reset
+20251103-16:42:13: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:52892
+20251103-16:42:13: Acceptor heartbeat set to 30 seconds
+20251103-16:42:13: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:42:13: Received logon
+20251103-16:42:13: Responding to Logon request
+20251103-16:46:00: Disconnecting: Socket exception (/127.0.0.1:52892): java.net.SocketException: Connection reset
+20251103-16:46:11: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:55996
+20251103-16:46:11: Acceptor heartbeat set to 30 seconds
+20251103-16:46:11: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:46:11: Received logon
+20251103-16:46:11: Responding to Logon request
+20251103-16:47:03: Disconnecting: Socket exception (/127.0.0.1:55996): java.net.SocketException: Connection reset
+20251103-16:47:15: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:63311
+20251103-16:47:15: Acceptor heartbeat set to 30 seconds
+20251103-16:47:15: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:47:15: Received logon
+20251103-16:47:15: Responding to Logon request
+20251103-16:47:27: Received logout request
+20251103-16:47:27: Sent logout response
+20251103-16:47:27: Disconnecting: Received logout request
+20251103-16:49:12: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:52923
+20251103-16:49:12: Acceptor heartbeat set to 30 seconds
+20251103-16:49:12: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:49:12: Received logon
+20251103-16:49:12: Responding to Logon request
+20251103-16:52:43: Disconnecting: Socket exception (/127.0.0.1:52923): java.net.SocketException: Connection reset
+20251103-16:57:03: Accepting session FIX.4.4:EXCHANGE_CBOEEDGA->GATEWAY from /127.0.0.1:64580
+20251103-16:57:03: Acceptor heartbeat set to 30 seconds
+20251103-16:57:03: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-16:57:03: Received logon
+20251103-16:57:03: Responding to Logon request
+20251103-16:57:11: Received logout request
+20251103-16:57:11: Sent logout response
+20251103-16:57:11: Disconnecting: Received logout request

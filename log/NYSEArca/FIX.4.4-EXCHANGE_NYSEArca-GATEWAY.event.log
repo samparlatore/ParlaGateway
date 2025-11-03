@@ -1,10 +1,8 @@
-20251103-06:24:31: Session FIX.4.4:EXCHANGE_NYSEArca->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
-20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_NYSEArca->GATEWAY
-20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_NYSEArca->GATEWAY from /127.0.0.1:49886
-20251103-07:09:51: Acceptor heartbeat set to 30 seconds
-20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-07:09:51: Received logon
-20251103-07:09:51: Responding to Logon request
-20251103-07:11:00: Received logout request
-20251103-07:11:00: Sent logout response
-20251103-07:11:00: Disconnecting: Received logout request
+20251103-13:55:33: Session FIX.4.4:EXCHANGE_NYSEArca->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-13:55:33: Created session: FIX.4.4:EXCHANGE_NYSEArca->GATEWAY
+20251103-15:02:23: Accepting session FIX.4.4:EXCHANGE_NYSEArca->GATEWAY from /127.0.0.1:49917
+20251103-15:02:23: Acceptor heartbeat set to 30 seconds
+20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:02:23: Received logon
+20251103-15:02:23: Responding to Logon request
+20251103-15:05:48: Disconnecting: Socket exception (/127.0.0.1:49917): java.net.SocketException: Connection reset

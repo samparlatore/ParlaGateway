@@ -21,6 +21,14 @@
         <span title="Connect to all configured exchanges"><button id="connectAll">Connect All</button></span>
         </div>
         <table id="exchangeStatus" class="status-table">
+            <colgroup>
+                <col style="width: 110px;">   <!-- Exchange -->
+                <col style="width: 95px;">  <!-- Status -->
+                <col style="width: 75px;">   <!-- Latency -->
+                <col style="width: 120px;">  <!-- Last Message -->
+                <col style="width: 65px;">  <!-- Age -->
+                <col style="width: 210px;">  <!-- Controls -->
+            </colgroup>
             <thead>
                 <tr>
                     <th>Exchange</th>

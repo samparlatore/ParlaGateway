@@ -40,15 +40,19 @@ public class StatusDataServlet extends HttpServlet {
                                 "\"latencyFormatted\":\"%s\"," +
                                 "\"lastMessage\":\"%s\"," +
                                 "\"lastMessageType\":\"%s\"," +
-                                "\"lastMessageAge\":\"%s\"" +
-                                "}",
+                                "\"lastMessageAgeMillis\":%d," +
+                                "\"latencyAlertMillis\":%d," +
+                                "\"heartbeat\":%d" +
+                            "}",
                         escapeJson(status.getAcronym()),
                         escapeJson(status.getStatus()),
                         status.getLatencyMicros(),
                         escapeJson(status.getLatencyFormatted()),
                         escapeJson(status.getLastMessageTimestamp()),
                         escapeJson(status.getLastMessageType()),
-                        escapeJson(status.getLastMessageAge())
+                        status.getLastMessageAgeMillis(),
+                        status.getLatencyAlertMillis(),
+                        status.getHeartbeatMillis()
                 ))
                 .collect(Collectors.joining(",", "[", "]"));
 

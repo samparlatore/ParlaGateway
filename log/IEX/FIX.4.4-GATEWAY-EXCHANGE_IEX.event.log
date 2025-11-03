@@ -1,17 +1,7 @@
-20251103-06:40:11: Session FIX.4.4:GATEWAY->EXCHANGE_IEX schedule is daily, 00:00:00-UTC - 23:59:59-UTC
-20251103-06:40:11: Created session: FIX.4.4:GATEWAY->EXCHANGE_IEX
-20251103-06:40:11: Configured socket addresses for session: [/127.0.0.1:25005]
-20251103-06:40:11: MINA session created: local=/127.0.0.1:61937, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25005
-20251103-06:40:12: Initiated logon request
-20251103-06:40:12: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-06:40:12: Received logon
-20251103-07:09:50: Session FIX.4.4:GATEWAY->EXCHANGE_IEX schedule is daily, 00:00:00-UTC - 23:59:59-UTC
-20251103-07:09:50: Created session: FIX.4.4:GATEWAY->EXCHANGE_IEX
-20251103-07:09:50: Configured socket addresses for session: [/127.0.0.1:25005]
-20251103-07:09:50: MINA session created: local=/127.0.0.1:49887, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25005
-20251103-07:09:51: Initiated logon request
-20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-07:09:51: Received logon
-20251103-07:11:01: Initiated logout request
-20251103-07:11:01: Received logout response
-20251103-07:11:01: Disconnecting: Received logout response
+20251103-15:02:22: Session FIX.4.4:GATEWAY->EXCHANGE_IEX schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-15:02:22: Created session: FIX.4.4:GATEWAY->EXCHANGE_IEX
+20251103-15:02:22: Configured socket addresses for session: [/127.0.0.1:25005]
+20251103-15:02:22: MINA session created: local=/127.0.0.1:49918, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25005
+20251103-15:02:23: Initiated logon request
+20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:02:23: Received logon

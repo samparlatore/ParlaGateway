@@ -9,20 +9,16 @@ document.addEventListener("click", function(event) {
     }
 });
 
-function getLatencyClass(latency) {
-    if (latency < 100) return "latency-ok";
-    if (latency < 300) return "latency-warn";
-    return "latency-bad";
+function getLatencyClass(latencyMs) {
+  if (latencyMs < 100) return "latency-ok";
+  if (latencyMs < 300) return "latency-warn";
+  return "latency-bad";
 }
+
 
 function getStatusClass(status) {
     const key = status.toLowerCase().replace(/\W+/g, '');
     return "status-" + key;
-}
-
-function formatAge(ms) {
-    if (ms < 0 || ms == null) return "—";
-    return (ms / 1000).toFixed(2) + "s ago";
 }
 
 function updateExchangeTable(data) {
@@ -30,26 +26,36 @@ function updateExchangeTable(data) {
     tbody.innerHTML = "";
     data.forEach(exchange => {
         const row = document.createElement("tr");
-        row.className = getLatencyClass(exchange.latency);
+        const latencyMs = exchange.latencyMicros / 1000;
+        row.classList.add(getLatencyClass(latencyMs));
+        const ageCellClass = (exchange.lastMessageAgeMillis > exchange.heartbeat)  ? "stale-age" : "";
+        //console.log(`${exchange.acronym}: ageInMillis=${exchange.lastMessageAgeMillis}  heartbeat=${exchange.heartbeat}`);
+        const ageDisplay = formatAge(exchange.lastMessageAgeMillis);
+        //console.log(`${exchange.acronym}: latency=${exchange.latency}`);
         row.innerHTML = `
             <td><strong>${exchange.acronym}</strong></td>
             <td class="${getStatusClass(exchange.status)}">${exchange.status}</td>
             <td title="${exchange.latencyMicros} µs">${exchange.latencyFormatted}</td>
             <td title="${exchange.lastMessageType || '—'}">${exchange.lastMessage || '—'}</td>
-            <td>${exchange.lastMessageAge || '—'}</td>
+            <td class="${ageCellClass}" title="Threshold: ${exchange.latencyAlertMillis} ms">${ageDisplay}</td>
             <td>
               <div class="control-buttons">
                 <span title="connect"><button onclick="sendCommand('${exchange.acronym}', 'connect')">🔌</button></span>
                 <span title="disconnect"><button onclick="sendCommand('${exchange.acronym}', 'disconnect')">❌</button></span>
+                <span title="Send Heartbeat"><button onclick="sendCommand('${exchange.acronym}', 'heartbeat')">❤️</button></span>
+                <span title="Send TestRequest"><button onclick="sendCommand('${exchange.acronym}', 'testRequest')">🧪</button></span>
+                <span title="Send ResendRequest"><button onclick="sendCommand('${exchange.acronym}', 'resendRequest')">🔁</button></span>
               </div>
             </td>
         `;
-        if (exchange.lastMessageAge && exchange.lastMessageAge.includes("s ago")) {
-            const ageSec = parseFloat(exchange.lastMessageAge);
-            if (ageSec > 5) row.classList.add("stale-row");
-        }
         tbody.appendChild(row);
     });
+}
+
+function formatAge(ageMillis) {
+  if (ageMillis == null || isNaN(ageMillis)) return "—";
+  if (ageMillis < 1000) return `${ageMillis}ms`;
+  return `${(ageMillis / 1000).toFixed(1)}s`;
 }
 
 function sendCommand(acronym, action) {

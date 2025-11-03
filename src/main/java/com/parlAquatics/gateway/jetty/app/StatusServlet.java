@@ -41,7 +41,8 @@ public class StatusServlet extends HttpServlet {
                                 "\"latencyFormatted\":\"%s\"," +
                                 "\"lastMessage\":\"%s\"," +
                                 "\"lastMessageType\":\"%s\"," +
-                                "\"lastMessageAge\":\"%s\"" +
+                                "\"lastMessageAgeMillis\":%d," +
+                                "\"latencyAlertMillis\":%d" +
                                 "}",
                         escapeJson(status.getAcronym()),
                         escapeJson(status.getStatus()),
@@ -49,7 +50,8 @@ public class StatusServlet extends HttpServlet {
                         escapeJson(status.getLatencyFormatted()),
                         escapeJson(status.getLastMessageTimestamp()),
                         escapeJson(status.getLastMessageType()),
-                        escapeJson(status.getLastMessageAge())
+                        status.getLastMessageAgeMillis(),
+                        status.getLatencyAlertMillis()
                 ))
                 .collect(Collectors.joining(",", "[", "]"));
 

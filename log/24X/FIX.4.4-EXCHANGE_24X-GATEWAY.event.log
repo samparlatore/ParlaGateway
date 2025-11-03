@@ -1,16 +1,14 @@
-20251103-06:24:31: Session FIX.4.4:EXCHANGE_24X->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
-20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_24X->GATEWAY
-20251103-07:03:02: Accepting session FIX.4.4:EXCHANGE_24X->GATEWAY from /127.0.0.1:60821
-20251103-07:03:02: Acceptor heartbeat set to 30 seconds
-20251103-07:03:02: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-07:03:02: Received logon
-20251103-07:03:02: Responding to Logon request
-20251103-07:08:35: Disconnecting: Socket exception (/127.0.0.1:60821): java.net.SocketException: Connection reset
-20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_24X->GATEWAY from /127.0.0.1:49881
-20251103-07:09:51: Acceptor heartbeat set to 30 seconds
-20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-07:09:51: Received logon
-20251103-07:09:51: Responding to Logon request
-20251103-07:10:55: Received logout request
-20251103-07:10:55: Sent logout response
-20251103-07:10:55: Disconnecting: Received logout request
+20251103-13:55:33: Session FIX.4.4:EXCHANGE_24X->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-13:55:33: Created session: FIX.4.4:EXCHANGE_24X->GATEWAY
+20251103-14:58:23: Accepting session FIX.4.4:EXCHANGE_24X->GATEWAY from /127.0.0.1:63550
+20251103-14:58:23: Acceptor heartbeat set to 30 seconds
+20251103-14:58:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-14:58:23: Received logon
+20251103-14:58:23: Responding to Logon request
+20251103-15:02:01: Disconnecting: Socket exception (/127.0.0.1:63550): java.net.SocketException: Connection reset
+20251103-15:02:23: Accepting session FIX.4.4:EXCHANGE_24X->GATEWAY from /127.0.0.1:49912
+20251103-15:02:23: Acceptor heartbeat set to 30 seconds
+20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-15:02:23: Received logon
+20251103-15:02:23: Responding to Logon request
+20251103-15:05:48: Disconnecting: Socket exception (/127.0.0.1:49912): java.net.SocketException: Connection reset

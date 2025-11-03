@@ -132,7 +132,7 @@ public class NmsExchangeConfig {
         Dictionary dic = new Dictionary();
         Properties props = buildQuickFIXProperties();
         for (Map.Entry<Object, Object> entry : props.entrySet()) {
-            dic.setString(entry.getKey().toString(), entry.getValue().toString());
+            dic.setString(entry.getKey().toString(), entry.getValue().toString().replace(" ", ""));
         }
         return dic;
     }
