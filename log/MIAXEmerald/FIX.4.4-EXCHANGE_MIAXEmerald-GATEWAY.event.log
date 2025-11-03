@@ -1,8 +1,0 @@
-20251103-13:55:33: Session FIX.4.4:EXCHANGE_MIAXEmerald->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
-20251103-13:55:33: Created session: FIX.4.4:EXCHANGE_MIAXEmerald->GATEWAY
-20251103-15:02:23: Accepting session FIX.4.4:EXCHANGE_MIAXEmerald->GATEWAY from /127.0.0.1:49919
-20251103-15:02:23: Acceptor heartbeat set to 30 seconds
-20251103-15:02:23: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
-20251103-15:02:23: Received logon
-20251103-15:02:23: Responding to Logon request
-20251103-15:05:48: Disconnecting: Socket exception (/127.0.0.1:49919): java.net.SocketException: Connection reset
