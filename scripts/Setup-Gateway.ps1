@@ -1,4 +1,5 @@
 # scripts/Setup-Gateway.ps1
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # Define repo and directory
 $repoUrl = "https://github.com/samparlatore/ParlaGateway.git"
