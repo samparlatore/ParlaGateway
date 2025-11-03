@@ -1,0 +1,40 @@
+20251103-06:24:31: Session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_NASDAQ->GATEWAY
+20251103-06:26:59: Accepting session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY from /127.0.0.1:64129
+20251103-06:26:59: Acceptor heartbeat set to 30 seconds
+20251103-06:26:59: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-06:26:59: Received logon
+20251103-06:26:59: Responding to Logon request
+20251103-06:29:42: Received logout request
+20251103-06:29:42: Sent logout response
+20251103-06:29:42: Disconnecting: Received logout request
+20251103-06:30:07: Accepting session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY from /127.0.0.1:65459
+20251103-06:30:07: Acceptor heartbeat set to 30 seconds
+20251103-06:30:07: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-06:30:07: Received logon
+20251103-06:30:07: Responding to Logon request
+20251103-06:30:20: Received logout request
+20251103-06:30:20: Sent logout response
+20251103-06:30:20: Disconnecting: Received logout request
+20251103-07:02:42: Accepting session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY from /127.0.0.1:59612
+20251103-07:02:42: Acceptor heartbeat set to 30 seconds
+20251103-07:02:42: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:02:42: Received logon
+20251103-07:02:42: Responding to Logon request
+20251103-07:08:35: Disconnecting: Socket exception (/127.0.0.1:59612): java.net.SocketException: Connection reset
+20251103-07:08:52: Accepting session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY from /127.0.0.1:50349
+20251103-07:08:52: Acceptor heartbeat set to 30 seconds
+20251103-07:08:52: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:08:52: Received logon
+20251103-07:08:52: Responding to Logon request
+20251103-07:09:43: Received logout request
+20251103-07:09:43: Sent logout response
+20251103-07:09:43: Disconnecting: Received logout request
+20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_NASDAQ->GATEWAY from /127.0.0.1:49871
+20251103-07:09:51: Acceptor heartbeat set to 30 seconds
+20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:51: Received logon
+20251103-07:09:51: Responding to Logon request
+20251103-07:10:47: Received logout request
+20251103-07:10:47: Sent logout response
+20251103-07:10:47: Disconnecting: Received logout request

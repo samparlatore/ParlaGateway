@@ -34,20 +34,27 @@ public class StatusServlet extends HttpServlet {
 
         String json = statuses.stream()
                 .map(status -> String.format(
-                        "{\"acronym\":\"%s\",\"status\":\"%s\",\"latency\":%d,\"lastMessage\":\"%s\"}",
+                        "{" +
+                                "\"acronym\":\"%s\"," +
+                                "\"status\":\"%s\"," +
+                                "\"latencyMicros\":%d," +
+                                "\"latencyFormatted\":\"%s\"," +
+                                "\"lastMessage\":\"%s\"," +
+                                "\"lastMessageType\":\"%s\"," +
+                                "\"lastMessageAge\":\"%s\"" +
+                                "}",
                         escapeJson(status.getAcronym()),
                         escapeJson(status.getStatus()),
-                        status.getLatencyMs(),
-                        escapeJson(status.getLastMessageTimestamp())
+                        status.getLatencyMicros(),
+                        escapeJson(status.getLatencyFormatted()),
+                        escapeJson(status.getLastMessageTimestamp()),
+                        escapeJson(status.getLastMessageType()),
+                        escapeJson(status.getLastMessageAge())
                 ))
                 .collect(Collectors.joining(",", "[", "]"));
 
-        // Store JSON in request scope for JSP to consume if needed
         request.setAttribute("exchangeStatusJson", json);
-
-        // Set page title and forward to JSP
-        String pageTitle = "Exchange Status Dashboard";
-        getServletContext().setAttribute("pageTitle", pageTitle);
+        getServletContext().setAttribute("pageTitle", "Exchange Status Dashboard");
         request.getRequestDispatcher("/app/status.jsp").forward(request, response);
 
         logger.info("Served " + statuses.size() + " exchange statuses to " + request.getRemoteAddr());
@@ -57,5 +64,4 @@ public class StatusServlet extends HttpServlet {
         if (input == null) return "";
         return input.replace("\"", "\\\"").replace("\n", "").replace("\r", "");
     }
-
 }

@@ -45,13 +45,13 @@ public class ConfigLoader implements ServletContextListener {
             sce.getServletContext().setAttribute("generalConfigs", props);
 
             // Load tokens from nmsExchange.properties
-            Properties nmsEchangeProps = new Properties();
-            nmsEchangeProps.load(new FileInputStream("nmsExchange.properties"));
+            Properties nmsExchangeProps = new Properties();
+            nmsExchangeProps.load(new FileInputStream("nmsExchange.properties"));
 
             exchangeConfigs.clear();
             for (int i = 1; ; i++) {
                 String prefix = "nmsExchange." + i + ".";
-                String name = nmsEchangeProps.getProperty(prefix + "name");
+                String name = nmsExchangeProps.getProperty(prefix + "name");
                 //logger.info("Loaded config: " + prefix + "name" + " = " + nmsEchangeProps.getProperty(prefix + "name"));
                 if (name == null || name.isBlank()) {
                     //logger.info("No config found for index " + (i-1) + ". Stopping.");
@@ -60,27 +60,21 @@ public class ConfigLoader implements ServletContextListener {
                 try {
                     NmsExchangeConfig config = new NmsExchangeConfig(
                             name,
-                            nmsEchangeProps.getProperty(prefix + "acronym"),
-                            nmsEchangeProps.getProperty(prefix + "location"),
-                            nmsEchangeProps.getProperty(prefix + "ipAddress"),
-                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "port")),
-                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "latencyAlert")),
-                            nmsEchangeProps.getProperty(prefix + "handlerName", "default"),
-                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "connectionRetries", "3")),
-                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "connectionRetryInterval", "3000")),
-                            nmsEchangeProps.getProperty(prefix + "connectionRecoveryBehavior", "default"),
-                            nmsEchangeProps.getProperty(prefix + "connectionStartTime", "0930"),
-                            nmsEchangeProps.getProperty(prefix + "connectionEndTime", "1600"),
+                            nmsExchangeProps.getProperty(prefix + "acronym"),
+                            nmsExchangeProps.getProperty(prefix + "location"),
+                            nmsExchangeProps.getProperty(prefix + "ipAddress"),
+                            Integer.parseInt(nmsExchangeProps.getProperty(prefix + "port")),
+                            Integer.parseInt(nmsExchangeProps.getProperty(prefix + "latencyAlert", "1000")),
 
-                            nmsEchangeProps.getProperty(prefix + "connectionType", "initiator"),
-                            nmsEchangeProps.getProperty(prefix + "senderCompID", "GATEWAY"),
-                            nmsEchangeProps.getProperty(prefix + "targetCompID", "EXCHANGE"),
-                            Integer.parseInt(nmsEchangeProps.getProperty(prefix + "heartBtInt", "30")),
-                            nmsEchangeProps.getProperty(prefix + "useDataDictionary", "Y"),
-                            nmsEchangeProps.getProperty(prefix + "dataDictionary", "FIX42.xml"),
-                            nmsEchangeProps.getProperty(prefix + "fileStorePath", "store"),
-                            nmsEchangeProps.getProperty(prefix + "fileLogPath", "log"),
-                            nmsEchangeProps.getProperty(prefix + "beginString", "FIX.4.4")
+                            nmsExchangeProps.getProperty(prefix + "beginString", "FIX.4.4"),
+                            nmsExchangeProps.getProperty(prefix + "senderCompID", "GATEWAY"),
+                            nmsExchangeProps.getProperty(prefix + "targetCompID", "EXCHANGE"),
+                            Integer.parseInt(nmsExchangeProps.getProperty(prefix + "heartBtInt", "30")),
+
+                            "Y".equalsIgnoreCase(nmsExchangeProps.getProperty(prefix + "useDataDictionary", "Y")),
+                            nmsExchangeProps.getProperty(prefix + "dataDictionary", "FIX42.xml"),
+                            nmsExchangeProps.getProperty(prefix + "fileStorePath", "store"),
+                            nmsExchangeProps.getProperty(prefix + "fileLogPath", "log")
                     );
 
                     exchangeConfigs.put(config.getAcronym(), config);

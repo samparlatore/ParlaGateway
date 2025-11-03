@@ -34,22 +34,19 @@ function updateExchangeTable(data) {
         row.innerHTML = `
             <td><strong>${exchange.acronym}</strong></td>
             <td class="${getStatusClass(exchange.status)}">${exchange.status}</td>
-            <td>${exchange.latency} ms</td>
-            <td title="${exchange.lastMessage || '—'}">${exchange.lastMessage || '—'}</td>
-            <td>${formatAge(exchange.lastMessageAgeMs)}</td>
+            <td title="${exchange.latencyMicros} µs">${exchange.latencyFormatted}</td>
+            <td title="${exchange.lastMessageType || '—'}">${exchange.lastMessage || '—'}</td>
+            <td>${exchange.lastMessageAge || '—'}</td>
             <td>
               <div class="control-buttons">
-                <button onclick="sendCommand('${exchange.acronym}', 'disconnect')">✖</button>
-                <button onclick="sendCommand('${exchange.acronym}', 'connect')">⟳</button>
-                <button onclick="sendCommand('${exchange.acronym}', 'logon')">🔑</button>
-                <button onclick="sendCommand('${exchange.acronym}', 'logout')">🚪</button>
-                <button onclick="sendCommand('${exchange.acronym}', 'heartbeat')">❤️</button>
-                <button onclick="sendCommand('${exchange.acronym}', 'testRequest')">🧪</button>
+                <span title="connect"><button onclick="sendCommand('${exchange.acronym}', 'connect')">🔌</button></span>
+                <span title="disconnect"><button onclick="sendCommand('${exchange.acronym}', 'disconnect')">❌</button></span>
               </div>
             </td>
         `;
-        if (exchange.lastMessageAgeMs > 5000) {
-            row.classList.add("stale-row");
+        if (exchange.lastMessageAge && exchange.lastMessageAge.includes("s ago")) {
+            const ageSec = parseFloat(exchange.lastMessageAge);
+            if (ageSec > 5) row.classList.add("stale-row");
         }
         tbody.appendChild(row);
     });
@@ -136,15 +133,15 @@ document.getElementById("disconnectAll").addEventListener("click", () => {
     .catch(err => console.error("Disconnect All error:", err));
 });
 
-document.getElementById("reconnectAll").addEventListener("click", () => {
+document.getElementById("connectAll").addEventListener("click", () => {
     fetch("/control", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "reconnectAll" })
+        body: JSON.stringify({ action: "connectAll" })
     })
     .then(res => {
-        if (!res.ok) throw new Error("Reconnect All failed");
-        console.log("All exchanges reconnected");
+        if (!res.ok) throw new Error("Connect All failed");
+        console.log("All exchanges connected");
     })
-    .catch(err => console.error("Reconnect All error:", err));
+    .catch(err => console.error("Connect All error:", err));
 });

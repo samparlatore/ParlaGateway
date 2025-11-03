@@ -1,0 +1,16 @@
+20251103-06:24:31: Session FIX.4.4:EXCHANGE_IEX->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_IEX->GATEWAY
+20251103-06:40:12: Accepting session FIX.4.4:EXCHANGE_IEX->GATEWAY from /127.0.0.1:61937
+20251103-06:40:12: Acceptor heartbeat set to 30 seconds
+20251103-06:40:12: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-06:40:12: Received logon
+20251103-06:40:12: Responding to Logon request
+20251103-06:49:05: Disconnecting: Socket exception (/127.0.0.1:61937): java.net.SocketException: Connection reset
+20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_IEX->GATEWAY from /127.0.0.1:49887
+20251103-07:09:51: Acceptor heartbeat set to 30 seconds
+20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:51: Received logon
+20251103-07:09:51: Responding to Logon request
+20251103-07:11:01: Received logout request
+20251103-07:11:01: Sent logout response
+20251103-07:11:01: Disconnecting: Received logout request

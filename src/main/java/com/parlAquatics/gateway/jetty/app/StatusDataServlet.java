@@ -33,19 +33,28 @@ public class StatusDataServlet extends HttpServlet {
 
         String json = statuses.stream()
                 .map(status -> String.format(
-                        "{\"acronym\":\"%s\",\"status\":\"%s\",\"latency\":%d,\"lastMessage\":\"%s\"}",
+                        "{" +
+                                "\"acronym\":\"%s\"," +
+                                "\"status\":\"%s\"," +
+                                "\"latencyMicros\":%d," +
+                                "\"latencyFormatted\":\"%s\"," +
+                                "\"lastMessage\":\"%s\"," +
+                                "\"lastMessageType\":\"%s\"," +
+                                "\"lastMessageAge\":\"%s\"" +
+                                "}",
                         escapeJson(status.getAcronym()),
                         escapeJson(status.getStatus()),
-                        status.getLatencyMs(),
-                        escapeJson(status.getLastMessageTimestamp())
+                        status.getLatencyMicros(),
+                        escapeJson(status.getLatencyFormatted()),
+                        escapeJson(status.getLastMessageTimestamp()),
+                        escapeJson(status.getLastMessageType()),
+                        escapeJson(status.getLastMessageAge())
                 ))
                 .collect(Collectors.joining(",", "[", "]"));
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
-
-        //logger.info("Delivered " + statuses.size() + " statuses to " + request.getRemoteAddr());
     }
 
     private String escapeJson(String input) {

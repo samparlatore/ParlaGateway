@@ -13,6 +13,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import jakarta.json.Json;
@@ -38,15 +41,18 @@ public class GatewayControlServlet extends HttpServlet {
 
         // ✅ Handle global actions first
         if ("disconnectAll".equals(action)) {
-            gateway.getExchangeConfigs().forEach(cfg -> gateway.disconnect(cfg));
-            logger.info("Action 'disconnectAll' triggered for all exchanges");
+            logger.info("Action 'disconnectAll' triggered for all exchanges. " + action);
+            ExecutorService executor = Executors.newFixedThreadPool(6);
+            for (String acronym : gateway.getSessionRegistry().getRegisteredAcronyms()) {
+                executor.submit(() -> gateway.disconnect(acronym));
+            }
+            executor.shutdown(); // allow tasks to finish
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            return;
         }
 
-        if ("reconnectAll".equals(action)) {
-            gateway.getExchangeConfigs().forEach(cfg -> gateway.connect(cfg));
-            logger.info("Action 'reconnectAll' triggered for all exchanges");
+        if ("connectAll".equals(action)) {
+            logger.info("Action 'connectAll' triggered for all exchanges. " + action);
+            gateway.getExchangeConfigs().forEach(gateway::connect);
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             return;
         }
@@ -60,20 +66,8 @@ public class GatewayControlServlet extends HttpServlet {
         }
 
         switch (action) {
-            case "logon":
-                gateway.sendLogon(acronym);
-                break;
-            case "logout":
-                gateway.sendLogout(acronym);
-                break;
-            case "heartbeat":
-                gateway.sendHeartbeat(acronym);
-                break;
-            case "testRequest":
-                gateway.sendTestRequest(acronym, "UI-" + System.currentTimeMillis());
-                break;
             case "disconnect":
-                gateway.disconnect(cfg);
+                gateway.disconnect(acronym);
                 break;
             case "connect":
                 gateway.connect(cfg);
@@ -85,4 +79,5 @@ public class GatewayControlServlet extends HttpServlet {
 
         logger.info("Action '" + action + "' triggered for " + acronym);
         resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-    }}
+    }
+}

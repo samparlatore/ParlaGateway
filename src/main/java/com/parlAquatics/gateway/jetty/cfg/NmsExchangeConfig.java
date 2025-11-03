@@ -1,7 +1,11 @@
 package com.parlAquatics.gateway.jetty.cfg;
 
+import quickfix.Dictionary;
+import quickfix.SessionID;
+
 import java.time.Instant;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by Sam Parlatore
@@ -14,57 +18,43 @@ public class NmsExchangeConfig {
     private final String ipAddress;
     private final int port;
     private final int latencyAlert;
-    private final String handlerName;
-    private final int connectionRetries;
-    private final int connectionRetryInterval;
-    private final String connectionRecoveryBehavior;
-    private final String connectionStartTime;
-    private final String connectionEndTime;
-    // FIX-specific configuration
-    private final String connectionType;       // e.g., "initiator"
-    private final String senderCompID;         // e.g., "GATEWAY"
-    private final String targetCompID;         // e.g., "EXCHANGE"
-    private final int heartBtInt;              // e.g., 30
-    private final String useDataDictionary;    // e.g., "Y"
-    private final String dataDictionary;       // e.g., "FIX42.xml"
-    private final String fileStorePath;        // e.g., "store"
-    private final String fileLogPath;          // e.g., "log"
-    private final String beginString; // e.g. "FIX.4.4"
 
-    // Runtime state (updated by handler logic)
+    // FIX session parameters
+    private final String fixVersion;       // e.g. "FIX.4.4"
+    private final String senderCompID;     // e.g. "GATEWAY"
+    private final String targetCompID;     // e.g. "EXCHANGE"
+    private final int heartBtInt;          // e.g. 30
+    private final boolean useDataDictionary;
+    private final String dataDictionary;   // optional
+    private final String fileStorePath;
+    private final String fileLogPath;
+
+    // Runtime state
     private volatile ConnectionState connectionState = ConnectionState.SESSION_CLOSED;
-    private volatile int lastLatencyMs = -1;
-    private volatile Instant lastMessageTimestamp = null;
+    private volatile Instant lastMessageTimestamp;
+    private volatile long lastLatencyMicros = 0;
+    private volatile String lastMessageType = null;
+
 
     public enum ConnectionState {
-        SESSION_CLOSED,     // Explicitly disconnected
-        CONNECTING,         // Actively trying to connect
-        CONNECTED,          // Fully connected
-        FAILED              // All retries exhausted
+        SESSION_CLOSED,
+        CONNECTING,
+        CONNECTED,
+        FAILED
     }
 
     public NmsExchangeConfig(String name, String acronym, String location,
                              String ipAddress, int port, int latencyAlert,
-                             String handlerName, int connectionRetries,
-                             int connectionRetryInterval, String connectionRecoveryBehavior,
-                             String connectionStartTime, String connectionEndTime,
-                             String connectionType, String senderCompID, String targetCompID,
-                             int heartBtInt, String useDataDictionary, String dataDictionary,
-                             String fileStorePath, String fileLogPath, String beginString) {
+                             String fixVersion, String senderCompID, String targetCompID,
+                             int heartBtInt, boolean useDataDictionary, String dataDictionary,
+                             String fileStorePath, String fileLogPath) {
         this.name = name;
         this.acronym = acronym;
         this.location = location;
         this.ipAddress = ipAddress;
         this.port = port;
         this.latencyAlert = latencyAlert;
-        this.handlerName = handlerName;
-        this.connectionRetries = connectionRetries;
-        this.connectionRetryInterval = connectionRetryInterval;
-        this.connectionRecoveryBehavior = connectionRecoveryBehavior;
-        this.connectionStartTime = connectionStartTime;
-        this.connectionEndTime = connectionEndTime;
-
-        this.connectionType = connectionType;
+        this.fixVersion = fixVersion;
         this.senderCompID = senderCompID;
         this.targetCompID = targetCompID;
         this.heartBtInt = heartBtInt;
@@ -72,50 +62,91 @@ public class NmsExchangeConfig {
         this.dataDictionary = dataDictionary;
         this.fileStorePath = fileStorePath;
         this.fileLogPath = fileLogPath;
-        this.beginString = beginString;
     }
 
-
+    // Getters
     public String getName() { return name; }
     public String getAcronym() { return acronym; }
     public String getLocation() { return location; }
     public String getIpAddress() { return ipAddress; }
     public int getPort() { return port; }
     public int getLatencyAlert() { return latencyAlert; }
-    public String getHandlerName() { return handlerName; }
-    public int getConnectionRetries() { return connectionRetries; }
-    public int getConnectionRetryInterval() { return connectionRetryInterval; }
-    public String getConnectionRecoveryBehavior() { return connectionRecoveryBehavior; }
-    public String getConnectionStartTime() { return connectionStartTime; }
-    public String getConnectionEndTime() { return connectionEndTime; }
-    public String getConnectionType() { return connectionType; }
+    public String getFixVersion() { return fixVersion; }
     public String getSenderCompID() { return senderCompID; }
     public String getTargetCompID() { return targetCompID; }
     public int getHeartBtInt() { return heartBtInt; }
-    public String getUseDataDictionary() { return useDataDictionary; }
+    public boolean isUseDataDictionary() { return useDataDictionary; }
     public String getDataDictionary() { return dataDictionary; }
     public String getFileStorePath() { return fileStorePath; }
     public String getFileLogPath() { return fileLogPath; }
-    public int getLastLatencyMs() { return lastLatencyMs; }
+    public long getLastLatencyMicros() { return lastLatencyMicros; }
+    public String getLastMessageType() { return lastMessageType; }
     public Instant getLastMessageTimestamp() { return lastMessageTimestamp; }
-    public void setLastLatencyMs(int latencyMs) {  this.lastLatencyMs = latencyMs;}
-    public void setLastMessageTimestamp(Instant timestamp) { this.lastMessageTimestamp = timestamp;}
+    public void setLastMessageTimestamp(Instant timestamp) {  this.lastMessageTimestamp = timestamp; }
     public ConnectionState getConnectionState() { return connectionState; }
     public void setConnectionState(ConnectionState state) { this.connectionState = state; }
     public String getConnectionStatus() { return connectionState.name().toLowerCase().replace("_", " "); }
-    public String getBeginString() { return beginString; }
+
+    public void recordMessage(String msgType, long latencyMicros) {
+        this.lastMessageTimestamp = Instant.now();
+        this.lastLatencyMicros = latencyMicros;
+        this.lastMessageType = msgType;
+    }
+
+
+    // QuickFIX helpers
+    public SessionID buildQuickFIXSessionID() {
+        return new SessionID(fixVersion, senderCompID, targetCompID);
+    }
+
+    public Properties buildQuickFIXProperties() {
+        Properties props = new Properties();
+
+        props.setProperty("BeginString", fixVersion);
+        props.setProperty("SenderCompID", senderCompID);
+        props.setProperty("TargetCompID", targetCompID);
+        props.setProperty("ConnectionType", "initiator");
+        props.setProperty("SocketConnectHost", ipAddress);
+        props.setProperty("SocketConnectPort", String.valueOf(port));
+        props.setProperty("HeartBtInt", String.valueOf(heartBtInt));
+        props.setProperty("StartTime", "00:00:00");
+        props.setProperty("EndTime", "23:59:59");
+
+        props.setProperty("ResetOnLogon", "Y");
+        props.setProperty("ResetOnLogout", "Y");
+        props.setProperty("ResetOnDisconnect", "Y");
+
+        props.setProperty("UseDataDictionary", useDataDictionary ? "Y" : "N");
+        if (useDataDictionary && dataDictionary != null && !dataDictionary.isBlank()) {
+            props.setProperty("DataDictionary", dataDictionary);
+        }
+
+        props.setProperty("FileStorePath", fileStorePath + "/" + acronym);
+        props.setProperty("FileLogPath", fileLogPath + "/" + acronym);
+        //Don't start the sessions when initiator.start() is called.
+        props.setProperty("AutoStart", "false"); //doesn't work for initiator
+        return props;
+    }
+
+    public Dictionary buildQuickFIXDictionary() {
+        Dictionary dic = new Dictionary();
+        Properties props = buildQuickFIXProperties();
+        for (Map.Entry<Object, Object> entry : props.entrySet()) {
+            dic.setString(entry.getKey().toString(), entry.getValue().toString());
+        }
+        return dic;
+    }
 
 
     @Override
     public String toString() {
         return String.format(
-                "NmsExchangeConfig{name='%s', acronym='%s', location='%s', ip='%s', port=%d, latencyAlert=%d, handler='%s', " +
-                        "connectionType='%s', senderCompID='%s', targetCompID='%s', heartBtInt=%d, useDataDictionary='%s', " +
+                "NmsExchangeConfig{name='%s', acronym='%s', location='%s', ip='%s', port=%d, latencyAlert=%d, " +
+                        "fixVersion='%s', senderCompID='%s', targetCompID='%s', heartBtInt=%d, useDataDictionary=%s, " +
                         "dataDictionary='%s', fileStorePath='%s', fileLogPath='%s'}",
-                name, acronym, location, ipAddress, port, latencyAlert, handlerName,
-                connectionType, senderCompID, targetCompID, heartBtInt, useDataDictionary,
+                name, acronym, location, ipAddress, port, latencyAlert,
+                fixVersion, senderCompID, targetCompID, heartBtInt, useDataDictionary,
                 dataDictionary, fileStorePath, fileLogPath
         );
     }
-
 }

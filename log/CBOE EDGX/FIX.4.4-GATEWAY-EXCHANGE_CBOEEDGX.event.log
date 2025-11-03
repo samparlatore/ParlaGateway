@@ -1,0 +1,20 @@
+20251103-07:09:02: Session FIX.4.4:GATEWAY->EXCHANGE_CBOEEDGX schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-07:09:02: Created session: FIX.4.4:GATEWAY->EXCHANGE_CBOEEDGX
+20251103-07:09:02: Configured socket addresses for session: [/127.0.0.1:25015]
+20251103-07:09:02: MINA session created: local=/127.0.0.1:53588, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25015
+20251103-07:09:03: Initiated logon request
+20251103-07:09:03: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:03: Received logon
+20251103-07:09:45: Initiated logout request
+20251103-07:09:45: Received logout response
+20251103-07:09:45: Disconnecting: Received logout response
+20251103-07:09:50: Session FIX.4.4:GATEWAY->EXCHANGE_CBOEEDGX schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-07:09:50: Created session: FIX.4.4:GATEWAY->EXCHANGE_CBOEEDGX
+20251103-07:09:50: Configured socket addresses for session: [/127.0.0.1:25015]
+20251103-07:09:50: MINA session created: local=/127.0.0.1:49889, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25015
+20251103-07:09:51: Initiated logon request
+20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:51: Received logon
+20251103-07:11:03: Initiated logout request
+20251103-07:11:03: Received logout response
+20251103-07:11:03: Disconnecting: Received logout response

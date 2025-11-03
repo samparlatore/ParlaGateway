@@ -1,0 +1,17 @@
+20251103-07:02:59: Session FIX.4.4:GATEWAY->EXCHANGE_LTSE schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-07:02:59: Created session: FIX.4.4:GATEWAY->EXCHANGE_LTSE
+20251103-07:02:59: Configured socket addresses for session: [/127.0.0.1:25006]
+20251103-07:02:59: MINA session created: local=/127.0.0.1:60820, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25006
+20251103-07:03:00: Initiated logon request
+20251103-07:03:00: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:03:00: Received logon
+20251103-07:09:50: Session FIX.4.4:GATEWAY->EXCHANGE_LTSE schedule is daily, 00:00:00-UTC - 23:59:59-UTC
+20251103-07:09:50: Created session: FIX.4.4:GATEWAY->EXCHANGE_LTSE
+20251103-07:09:50: Configured socket addresses for session: [/127.0.0.1:25006]
+20251103-07:09:50: MINA session created: local=/127.0.0.1:49885, class org.apache.mina.transport.socket.nio.NioSocketSession, remote=/127.0.0.1:25006
+20251103-07:09:51: Initiated logon request
+20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:51: Received logon
+20251103-07:10:59: Initiated logout request
+20251103-07:10:59: Received logout response
+20251103-07:10:59: Disconnecting: Received logout response

@@ -1,0 +1,10 @@
+20251103-06:24:31: Session FIX.4.4:EXCHANGE_GIX->GATEWAY schedule is daily, 00:00:00-UTC - 00:00:00-UTC
+20251103-06:24:31: Created session: FIX.4.4:EXCHANGE_GIX->GATEWAY
+20251103-07:09:51: Accepting session FIX.4.4:EXCHANGE_GIX->GATEWAY from /127.0.0.1:49883
+20251103-07:09:51: Acceptor heartbeat set to 30 seconds
+20251103-07:09:51: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20251103-07:09:51: Received logon
+20251103-07:09:51: Responding to Logon request
+20251103-07:10:57: Received logout request
+20251103-07:10:57: Sent logout response
+20251103-07:10:57: Disconnecting: Received logout request

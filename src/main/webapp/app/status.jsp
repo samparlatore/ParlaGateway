@@ -18,7 +18,7 @@
         <span title="Last Poll Update">🔄 <strong id="lastUpdated">--:--:--.---</strong></span>
         <span title="Stop updates"><button id="togglePolling">Pause</button></span>
         <span title="End all exchange connections"><button id="disconnectAll">Disconnect All</button></span>
-        <span title="Connect to all configured exchanges"><button id="reconnectAll">Connect All</button></span>
+        <span title="Connect to all configured exchanges"><button id="connectAll">Connect All</button></span>
         </div>
         <table id="exchangeStatus" class="status-table">
             <thead>
