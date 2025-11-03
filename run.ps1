@@ -1,28 +1,28 @@
 # run.ps1
 $scriptDir = Join-Path $PSScriptRoot "scripts"
-$setupScript = Join-Path $scriptDir "Setup-Gateway.ps1"
+$repoBase = "https://raw.githubusercontent.com/samparlatore/ParlaGateway/main/scripts"
 
-# Detect platform
-if ($IsWindows) {
-    Write-Host "🧰 Detected Windows system"
-    if (Test-Path $setupScript) {
-        Write-Host "📂 Running Setup-Gateway.ps1..."
-        & PowerShell -ExecutionPolicy Bypass -File $setupScript
-    } else {
-        Write-Host "❌ Setup-Gateway.ps1 not found at $setupScript"
+# Ensure scripts/ folder exists
+if (-not (Test-Path $scriptDir)) {
+    New-Item -ItemType Directory -Path $scriptDir | Out-Null
+}
+
+# List of required Windows scripts
+$requiredScripts = @(
+    "Setup-Gateway.ps1",
+    "start-test-server.ps1",
+    "start-gateway.ps1"
+)
+
+# Download missing scripts
+foreach ($script in $requiredScripts) {
+    $localPath = Join-Path $scriptDir $script
+    if (-not (Test-Path $localPath)) {
+        Write-Host "📥 Downloading $script..."
+        Invoke-WebRequest "$repoBase/$script" -OutFile $localPath
     }
 }
-elseif ($IsLinux -or $IsMacOS) {
-    Write-Host "🧰 Detected Unix-like system"
-    $bashScript = Join-Path $scriptDir "Setup-Gateway.sh"
-    if (Test-Path $bashScript) {
-        Write-Host "📂 Running Setup-Gateway.sh..."
-        bash $bashScript
-    } else {
-        Write-Host "❌ Setup-Gateway.sh not found at $bashScript"
-    }
-}
-else {
-    Write-Host "❌ Unsupported OS"
-    exit 1
-}
+
+# Run setup
+Write-Host "🧰 Detected Windows system"
+& PowerShell -ExecutionPolicy Bypass -File (Join-Path $scriptDir "Setup-Gateway.ps1")
