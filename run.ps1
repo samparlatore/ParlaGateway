@@ -17,12 +17,18 @@ $requiredScripts = @(
 # Download missing scripts
 foreach ($script in $requiredScripts) {
     $localPath = Join-Path $scriptDir $script
+    $remoteUrl = "$repoBase/$script"  # Correct interpolation
     if (-not (Test-Path $localPath)) {
         Write-Host "📥 Downloading $script..."
-        Invoke-WebRequest "$repoBase/$script" -OutFile $localPath
+        Invoke-WebRequest -Uri $remoteUrl -OutFile $localPath
     }
 }
 
 # Run setup
 Write-Host "🧰 Detected Windows system"
-& PowerShell -ExecutionPolicy Bypass -File (Join-Path $scriptDir "Setup-Gateway.ps1")
+$setupScript = Join-Path $scriptDir "Setup-Gateway.ps1"
+if (Test-Path $setupScript) {
+    & PowerShell -ExecutionPolicy Bypass -File $setupScript
+} else {
+    Write-Host "❌ Setup-Gateway.ps1 not found at $setupScript"
+}
