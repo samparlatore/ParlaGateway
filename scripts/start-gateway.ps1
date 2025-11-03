@@ -8,6 +8,6 @@ $className = "com.parlAquatics.gateway.ParlaGateway"
 
 Start-Process "java" `
   -ArgumentList "-cp", "$jarPath;$libPath", $className `
-  -NoNewWindow -Wait
+  -WindowStyle Normal
 
   Pop-Location
